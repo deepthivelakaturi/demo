@@ -33,12 +33,12 @@
    <cloudHubDeployment>
       <uri>https://anypoint.mulesoft.com</uri>
       <muleVersion>4.4.0</muleVersion>
-      <username>agf</username>
-      <password>Mahesh*7798*</password>
-      <applicationName>cicd-ws-omvk958</applicationName>
-      <environment>Sandbox</environment>
-      <workers>1</workers>
-      <workerType>Micro</workerType>
+      <username>${username>}</username>
+      <password>${password}</password>
+      <applicationName>${applicationName}</applicationName>
+      <environment>${environment}</environment>
+      <workers>${workers}</workers>
+      <workerType>${workerType}</workerType>
       <objectStoreV2>true</objectStoreV2>
    </cloudHubDeployment>
 

@@ -7,8 +7,14 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<configuration-properties doc:name="Configuration properties" doc:id="3f069d72-c5e1-4b78-a989-d944a3e2d3cf" file="config.yaml" />
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="cba8744d-1079-4ab1-b97c-909f39a0f997" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="e8efd4f0-b1d0-4390-b69a-aaa8d3fd5a66" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
 	<flow name="flightsappFlow" doc:id="c6368370-d71c-4b44-8e02-228346694806" >
-		<http:listener doc:name="Listener" doc:id="4ca61a69-4580-4863-8300-37001c5d0645" path="/airlines"/>
+		<http:listener doc:name="Listener" doc:id="4ca61a69-4580-4863-8300-37001c5d0645" path="/airlines" config-ref="HTTP_Listener_config"/>
 		<db:select doc:name="Select" doc:id="27e36fc1-03c5-48f3-9a68-37f82122e9ea">
 			<db:sql ><![CDATA[select * from Flights]]></db:sql>
 		</db:select>
@@ -23,7 +29,7 @@ payload]]></ee:set-payload>
 		<logger level="INFO" doc:name="Logger" doc:id="03f1d2c9-5ca6-4c8f-bca7-6689f7baeb7d" />
 	</flow>
 	<flow name="flightsappFlow1" doc:id="5b1041ce-0bdb-4d27-893f-00d4ef999721" >
-		<http:listener doc:name="Listener" doc:id="5f68301f-c58a-4e3b-821d-a675ee03bea6" path="/airlines"/>
+		<http:listener doc:name="Listener" doc:id="5f68301f-c58a-4e3b-821d-a675ee03bea6" path="/airlines" config-ref="HTTP_Listener_config1"/>
 		<db:insert doc:name="Insert" doc:id="a3379e1d-36fa-4c07-951e-466db85f92a7" >
 			<db:sql ><![CDATA[insert in to flights values (:F_ID, :F_NAME, :F_DEST,:F_PRICE)]]></db:sql>
 			<db:input-parameters ><![CDATA[1 {"F_ID:payload.ID", "F_NAME:payload.NAME", "F_DEST:payload.DEST", "F_PRICE:payload:PRICE"}]]></db:input-parameters>
